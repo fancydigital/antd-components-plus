@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import _ from 'lodash';
 import { Select } from 'antd';
+import PropsType from 'prop-types';
 
 /**
  * 内置option转化逻辑 同时支持object和array
@@ -26,7 +27,7 @@ const map = (collection, callback) => {
   return _.map(collection, fn);
 };
 
-const getAllOption = allOption => {
+const getAllOption = (allOption) => {
   if (allOption === false) {
     return null;
   } else {
@@ -50,32 +51,50 @@ const getAllOption = allOption => {
  * @param  {Object|Boolean} allOption default: false。 支持对象{key:'',label:'全部'} 用于在option中增加一个全部选项
  * @param  {Function} getOption 返回值 {String|ReactElment|ReactNode}
  */
-export default ({
-  dataSource,
-  fieldNames = { label: 'label', key: 'key', value: 'key' },
-  allOption = false,
-  getOption = optiom => ({
-    label: optiom[fieldNames.label],
-    key: optiom[fieldNames.key],
-    value: optiom[fieldNames.value || fieldNames.key]
-  }),
-  mode,
-  allowClear = !!mode, // mode有值则默认支持清空
-  ...selectProps
-}) => {
-  return (
-    <Select style={{ width: '100%' }} {...selectProps} mode={mode} allowClear={allowClear}>
-      {getAllOption(allOption)}
-      {map(dataSource, option => {
-        let { label, key, value = key, ...optionProps } = getOption(option);
-        key = _.isUndefined(key) ? value : key;
 
-        return (
-          <Select.Option {...optionProps} key={`${key}`} value={value}>
-            {label}
-          </Select.Option>
-        );
-      })}
-    </Select>
-  );
-};
+export default class Select2 extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
+  static PropsType = {
+    fieldNames: PropsType.object,
+    allOption: PropsType.oneOfType(PropsType.bool, PropsType.object),
+    getOption: PropsType.func,
+    fieldNames: PropsType.object
+  };
+
+  render() {
+    const {
+      dataSource,
+      fieldNames = { label: 'label', key: 'key', value: 'key' },
+      allOption = false,
+      getOption = (optiom) => ({
+        label: optiom[fieldNames.label],
+        key: optiom[fieldNames.key],
+        value: optiom[fieldNames.value || fieldNames.key]
+      }),
+      mode,
+      allowClear = !!mode, // mode有值则默认支持清空
+      ...selectProps
+    } = this.props;
+
+    return (
+      <Select style={{ width: '100%' }} mode={mode} allowClear={allowClear} {...selectProps}>
+        {getAllOption(allOption)}
+        {map(dataSource, (option) => {
+          let { label, key, value = key, ...optionProps } = getOption(option);
+          key = _.isUndefined(key) ? value : key;
+
+          return (
+            <Select.Option {...optionProps} key={key} value={value}>
+              {label}
+            </Select.Option>
+          );
+        })}
+      </Select>
+    );
+  }
+}
+
+Select2.Option = Select.Option;

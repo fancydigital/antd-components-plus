@@ -8,6 +8,9 @@ npm install antd-components-plus
 yarn add antd-components-plus
 ```
 
+## Antd Version
+3.x
+
 ## Usage
 
 Select
@@ -20,8 +23,15 @@ export default ()=>{
     return <div>
         <Select  dataSource={{0:'开始',1:'进行中',1:'暂停'}}/>
         <Select  dataSource={[{key:'0',label:'有效'},{key:'1',label:'无效'}]}/>
-        <Select  dataSource={[{userid:'0',name:'abel'},{userid:'1',name:'Li Lei'}]} 
-            fieldNames={{key:'userid',label:'name'}}/>
+        <Select  
+            dataSource={[{userid:'0',name:'abel'},{userid:'1',name:'Li Lei'}]} 
+            fieldNames={{key:'userid',label:'name'}}
+        />
+        <Select 
+            getOption={({label,key,...otherProps})=>{
+                return <Select.Option key={key}>[{otherProps.type}]-{label}<Select.Option>
+            }}
+        />
     </div>
 }
 ```
@@ -43,16 +53,36 @@ const { RangePicker } = DatePicker;
 
 export default (filterValue)=>{
     return <div>
-        <DatePicker defaultValue={filterValue.start_date}/>
-        <RangePicker names={['start_date', 'end_date']} defaultValue={[filterValue.start_date, filterValue.end_date]} />
-        <RangePicker defaultValue={[filterValue.start_date, filterValue.end_date]} />
+        <DatePicker 
+            defaultValue={filterValue.start_date} 
+            onChange={(value)=>{
+                console.log(value) // typeof value => string
+            }}
+        />
+        <RangePicker 
+            names={['start_date', 'end_date']} 
+            defaultValue={[filterValue.start_date, filterValue.end_date]} 
+            onChange={(value)=>{
+                console.log(value) // typeof value => {start_date:string,end_date:string}
+            }}
+            format="YYYY-MM-DD"
+        />
+        <RangePicker 
+            defaultValue={[filterValue.start_date, filterValue.end_date]} 
+            onChange={(value)=>{
+                console.log(value) // typeof value => [string,string]
+            }}
+        />
     </div>
 }
 
 ```
 属性说明   
-| 属性名      | 说明                                                                                                                                                 | 类型    | 默认值 |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------ |
-| value       | 对value会自动进行修正，无需关注值是否有效。只需在dateRange传入数组，如果是dataRange，传入的value，两个值都会*undefined*，则会将值整体改为*undefined* | any     | -      |
-| momentValue | 默认将datepicker的值改为string，添加此参数则返回`moment`对象                                                                                         | boolean | false  |
-| names       | 方便后续使用，可以将返回值改为对象，按照数据传递的顺序赋值，仅 `RangePicker` 拥有                                                                    | array   | -      |
+| 属性名      | 说明                                                                                                                                                     | 类型    | 默认值   |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | -------- |
+| value       | 对value会自动进行修正，无需关注值是否有效。只需在`dateRange`传入数组，如果是`dataRange`，传入的value，两个值都会*undefined*，则会将值整体改为*undefined* | string  | string[] | - |
+| momentValue | 默认将datepicker的值改为string，添加此参数则返回`moment`对象                                                                                             | boolean | false    |
+| names       | 方便后续使用，可以将返回值改为对象，按照数据传递的顺序赋值，仅 `RangePicker` 拥有                                                                        | array   | -        |
+
+## License
+MIT

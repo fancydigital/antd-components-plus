@@ -1,7 +1,7 @@
 {
   "name": "antd-components-plus",
   "description": "对antd组件增强和扩展",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "scripts": {
     "build": "",
     "test": ""
@@ -18,5 +18,12 @@
     "antd",
     "component"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "antd": "3.x",
+    "loadsh": "^0.0.4",
+    "moment": "^2.27.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1"
+  }
 }
