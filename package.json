@@ -2,5 +2,9 @@
   "name": "antd-components-plus",
   "description": "对antd组件增强和扩展",
   "version": "0.0.1",
-  "repository": ""
+  "repository": "https://github.com/fancydigital/antd-components-plus",
+  "keywords": [
+    "antd",
+    "component"
+  ]
 }
