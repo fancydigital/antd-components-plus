@@ -5,7 +5,7 @@
 ```js
 npm install antd-components-plus 
  // or
- yarn add antd-components-plus
+yarn add antd-components-plus
 ```
 
 ## Usage
@@ -43,14 +43,16 @@ const { RangePicker } = DatePicker;
 
 export default (filterValue)=>{
     return <div>
+        <DatePicker defaultValue={filterValue.start_date}/>
         <RangePicker names={['start_date', 'end_date']} defaultValue={[filterValue.start_date, filterValue.end_date]} />
         <RangePicker defaultValue={[filterValue.start_date, filterValue.end_date]} />
     </div>
 }
 
 ```
-属性说明
+属性说明   
 | 属性名      | 说明                                                                              | 类型    | 默认值 |
 | ----------- | --------------------------------------------------------------------------------- | ------- | ------ |
+| value       | 对value会自动进行修正，无法关注值是否有效。只需在dateRange传入数组                | any     | -      |
 | momentValue | 默认将datepicker的值改为string，添加此参数则返回`moment`对象                      | boolean | false  |
 | names       | 方便后续使用，可以将返回值改为对象，按照数据传递的顺序赋值，仅 `RangePicker` 拥有 | array   | -      |
