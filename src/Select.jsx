@@ -59,7 +59,7 @@ export default class Select2 extends PureComponent {
 
   static PropsType = {
     fieldNames: PropsType.object,
-    allOption: PropsType.oneOfType(PropsType.bool, PropsType.object),
+    allOption: PropsType.oneOfType([PropsType.bool, PropsType.object]),
     getOption: PropsType.func,
     fieldNames: PropsType.object
   };
