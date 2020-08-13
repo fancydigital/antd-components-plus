@@ -1,7 +1,7 @@
 {
   "name": "antd-components-plus",
   "description": "对antd组件增强和扩展",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "build": "",
     "test": ""
