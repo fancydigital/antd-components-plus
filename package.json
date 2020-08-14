@@ -3,14 +3,16 @@
   "description": "对antd组件增强和扩展",
   "version": "1.0.1",
   "scripts": {
-    "build": "",
+    "build": "rollup -c rollup.config.js",
     "test": ""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fancydigital/antd-components-plus.git"
   },
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "module": "src/index.js",
+  "unpkg": "dist/index.js",
   "engines": {
     "npm": ">=3.0.0"
   },
@@ -19,8 +21,19 @@
     "component"
   ],
   "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "rollup": "^2.25.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  },
   "dependencies": {
     "antd": "3.x",
+    "babel": "^6.23.0",
     "loadsh": "^0.0.4",
     "moment": "^2.27.0",
     "prop-types": "^15.7.2",

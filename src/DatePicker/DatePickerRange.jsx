@@ -3,7 +3,7 @@ import { DatePicker } from 'antd';
 import moment from 'moment';
 import PropsType from 'prop-types';
 import { DEFAULT_DATE_FORMAT } from './index';
-import _ from 'lodash';
+import isPlainObject from 'lodash/isPlainObject';
 
 const { RangePicker } = DatePicker;
 const noop = () => {};
@@ -43,7 +43,7 @@ export default class DatePickerRange extends PureComponent {
    *
    * @param {Array} value
    */
-  onChange = value => {
+  onChange = (value) => {
     const {
       onChange = noop,
       momentValue = false,
@@ -67,7 +67,7 @@ export default class DatePickerRange extends PureComponent {
 
   render() {
     let { value, defaultValue, names, format = DEFAULT_DATE_FORMAT, ...props } = this.props;
-    if (_.isPlainObject(value)) {
+    if (isPlainObject(value)) {
       // 按照names取值
       if (Array.isArray(names) && names.length === 2) {
         value = [value[names[0]], value[names[1]]];

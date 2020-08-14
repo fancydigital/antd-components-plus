@@ -1,7 +1,11 @@
 import React, { PureComponent } from 'react';
-import _ from 'lodash';
+// import { isPlainObject, map, isUndefined } from 'lodash';
 import { Select } from 'antd';
 import PropsType from 'prop-types';
+
+import isPlainObject from 'lodash/isPlainObject';
+import map from 'lodash/map';
+import isUndefined from 'lodash/isUndefined';
 
 /**
  * 内置option转化逻辑 同时支持object和array
@@ -11,20 +15,20 @@ import PropsType from 'prop-types';
  *
  * @example
  *
- * map({1:'a',2:'b'})  => {key:1,label:'a'}
+ * mapCollection({1:'a',2:'b'})  => {key:1,label:'a'}
  *
- * * map([{1:'a'},{2:'b'}])  => {key:1,label:'a'} {key:2,label:'b'}
+ * * mapCollection([{1:'a'},{2:'b'}])  => {key:1,label:'a'} {key:2,label:'b'}
  */
-const map = (collection, callback) => {
+const mapCollection = (collection, callback) => {
   let fn = callback;
-  if (_.isPlainObject(collection)) {
+  if (isPlainObject(collection)) {
     fn = (label, key) =>
       callback({
         key,
         label
       });
   }
-  return _.map(collection, fn);
+  return map(collection, fn);
 };
 
 const getAllOption = (allOption) => {
@@ -82,9 +86,9 @@ export default class Select2 extends PureComponent {
     return (
       <Select style={{ width: '100%' }} mode={mode} allowClear={allowClear} {...selectProps}>
         {getAllOption(allOption)}
-        {map(dataSource, (option) => {
+        {mapCollection(dataSource, (option) => {
           let { label, key, value = key, ...optionProps } = getOption(option);
-          key = _.isUndefined(key) ? value : key;
+          key = isUndefined(key) ? value : key;
 
           return (
             <Select.Option {...optionProps} key={key} value={value}>

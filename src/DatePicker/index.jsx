@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import { DatePicker } from 'antd';
 import moment from 'moment';
-import _ from 'lodash';
+// import _ from 'lodash';
 import PropsType from 'prop-types';
 import RangePicker from './DatePickerRange';
+import isEmpty from 'lodash/isEmpty';
 
 export const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
 
@@ -19,7 +20,7 @@ export default class DatePicker2 extends PureComponent {
    *
    * @param {Moment} value
    */
-  onChange = value => {
+  onChange = (value) => {
     const { onChange = noop, momentValue = false, format = DEFAULT_DATE_FORMAT } = this.props;
     if (momentValue === true) {
       onChange(value);
@@ -29,7 +30,7 @@ export default class DatePicker2 extends PureComponent {
   };
   render() {
     let { value, format = DEFAULT_DATE_FORMAT, ...props } = this.props;
-    if (!moment.isMoment(value) && !_.isEmpty(value)) {
+    if (!moment.isMoment(value) && !isEmpty(value)) {
       value = moment(value);
     }
 
