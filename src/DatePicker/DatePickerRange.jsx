@@ -50,7 +50,7 @@ export default class DatePickerRange extends PureComponent {
       names,
       format = DEFAULT_DATE_FORMAT
     } = this.props;
-    if (momentValue === true) {
+    if (momentValue === true || value.length === 0) {
       onChange(value);
     } else {
       const valuesString = [value[0].format(format), value[1].format(format)];

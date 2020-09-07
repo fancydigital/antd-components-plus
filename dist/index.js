@@ -3566,7 +3566,7 @@ var DatePickerRange = /*#__PURE__*/function (_PureComponent) {
           _this$props$format = _this$props.format,
           format = _this$props$format === void 0 ? DEFAULT_DATE_FORMAT : _this$props$format;
 
-      if (momentValue === true) {
+      if (momentValue === true || value.length === 0) {
         onChange(value);
       } else {
         var valuesString = [value[0].format(format), value[1].format(format)];
