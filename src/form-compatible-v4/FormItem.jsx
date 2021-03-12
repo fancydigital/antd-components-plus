@@ -23,12 +23,12 @@ export default class FormItem extends Component {
       noStyle,
       children,
       rules,
-      valuePropName,
-      validateTrigger,
-      validateFirst,
-      normalize,
-      preserve,
-      trigger,
+      validateFirst = false,
+      validateTrigger = 'onChange',
+      normalize = value => value,
+      preserve = false,
+      trigger = 'onChange',
+      valuePropName = 'value',
       ...rest
     } = this.props;
     return (
