@@ -84,5 +84,28 @@ export default (filterValue)=>{
 | momentValue | 默认将datepicker的值改为string，添加此参数则返回`moment`对象                                                                                             | boolean | false    |
 | names       | 方便后续使用，可以将返回值改为对象，按照数据传递的顺序赋值，仅 `RangePicker` 拥有                                                                        | array   | -        |
 
+Form  
+目前用于`antd` 3.x 兼容 4.x 写法。  
+用法详见 antd 4.x文档
+```js
+// 3.x 不推荐使用
+import {
+    Form
+} from 'antd-components-plus';
+// 推荐写法
+import Form from 'antd/lib/form';
+// webpack
+resolve: {
+    alias: {
+      'antd/lib/form': require('path').resolve(__dirname, 'src/components/antd-components-plus/form-compatible-v4'),
+    },
+},
+
+// 4.x 
+import {
+    Form
+} from 'antd'
+```
+
 ## License
 MIT
