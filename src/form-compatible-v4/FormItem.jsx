@@ -14,26 +14,38 @@ export default class FormItem extends Component {
     tooltip: PropTypes.element,
     noStyle: PropTypes.bool,
     labelAlign: PropTypes.oneOf(['left', 'right']),
-    hidden: PropTypes.bool
+    hidden: PropTypes.bool,
+    // 附加属性
+    editable: PropTypes.bool
   };
   render() {
     const {
       name,
       required,
       noStyle,
-      children,
       rules,
       validateFirst = false,
       validateTrigger = 'onChange',
-      normalize = value => value,
+      normalize = (value) => value,
       preserve = false,
       trigger = 'onChange',
       valuePropName = 'value',
+      children,
+      hidden = false,
+      editable = false,
       ...rest
     } = this.props;
+
     return (
       <Consumer>
-        {({ form, initialValues = {}, wrapperCol, labelCol, colon }) => {
+        {({
+          form,
+          initialValues = {},
+          wrapperCol,
+          labelCol,
+          colon,
+          editable: formEditable = false
+        }) => {
           let decorator;
 
           if (name) {
@@ -49,6 +61,14 @@ export default class FormItem extends Component {
             })(children);
           } else {
             decorator = children;
+          }
+
+          if (hidden) {
+            return null;
+          }
+
+          if (editable === false || (editable === true && formEditable === false)) {
+            decorator = form.getFieldValue(name);
           }
 
           if (noStyle) {
